@@ -13,12 +13,12 @@ class PersonController extends Controller
         return view('pages.input_person');
     }
     public function submit(Request $request){
-        dd($request);
+        //dd($request);
         $person = new Person;
-        $person->user_id = Auth()->id();
+        $person->user_id = $request->user_id;
         $person->full_name = $request->name;
         $person->save();
-        return view('pages.input_person');
+        return view('home');
     }
     public function api_data($id)
     {

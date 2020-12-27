@@ -2,43 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 class RpcController extends Controller
 {
-    public function on(){
+    public function setActive($payload){
         $token = 'Bearer '.$this->getToken();
-        $body = ('{"method": "setGpioStatus", "params": {"pin": 5,"enabled": true}}');
         //dd($token);
+        $url = "http://localhost:8080/api/plugins/rpc/oneway/".$payload->device_id;
         $rpc = Http::withHeaders([
             'X-Authorization' => $token,
             'Content-Type' => 'text/plain'
-        ])->post('http://localhost:8080/api/plugins/rpc/oneway/c91d1ce0-4756-11eb-9199-39f586681b64', ['method' => 'setActive',
+        ])->post($url, ['method' => 'setActive',
         'params' => array(
-            'attendanceId' => 5,
-            'fullName' => "l0wpassfilter"
+            'attendanceId' => $payload->attendance_id,
+            'fullName' => $payload->person_name,
             )
         ]);
         //dd(($rpc));
-        return view('home');
+
     }
-    public function off(){
+    public function setInactive($payload){
         $token = 'Bearer '.$this->getToken();
-        $body = ('{"method": "setGpioStatus", "params": {"pin": 5,"enabled": true}}');
         //dd($token);
+        $url = "http://localhost:8080/api/plugins/rpc/oneway/".$payload->device_id;
         $rpc = Http::withHeaders([
             'X-Authorization' => $token,
             'Content-Type' => 'text/plain'
-        ])->get('http://localhost:8080/api/tenant/devices?type=default&pageSize=999&page=0');
-        dd(json_decode($rpc)->data);
-        $data = array();
-        foreach (json_decode($rpc)->data as $d){
-            array_push($data, $d->name);
-        }
-        dd($data);
-        return view('home');
+        ])->post($url, ['method' => 'setInactive', "params" => ""]);
+        //dd(($rpc));
+
     }
+
+    
     private function getToken(){
         $response = Http::post('http://localhost:8080/api/auth/login', [
             'username' => 'tenant@thingsboard.org',
@@ -47,4 +45,6 @@ class RpcController extends Controller
         
         return json_decode($response)->token;
     }
+   
+
 }
