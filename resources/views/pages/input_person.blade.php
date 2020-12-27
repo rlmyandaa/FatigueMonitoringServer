@@ -12,6 +12,7 @@
                         @csrf
                         <label>Input Name :</label>
                         <input type="text" name="name"> <br />
+                        <input type="text" name="user_id"> <br />
                         <button type="submit">Submit</button>
                     </form>
                 </div>

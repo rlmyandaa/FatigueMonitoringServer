@@ -32,4 +32,7 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/device_list', 'Dashboard_DeviceController@device_list');
 
     Route::get('/active_list', 'Dashboard_PersonController@active_list');
+
+    Route::get('/report', 'Dashboard_ReportController@all')->name('report');
+    Route::get('/report/{uid}', 'Dashboard_ReportController@detail')->name('report.detail');
 });
