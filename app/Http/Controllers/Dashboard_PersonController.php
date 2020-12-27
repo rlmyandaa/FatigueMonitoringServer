@@ -92,7 +92,6 @@ class Dashboard_PersonController extends Controller
             'X-Authorization' => $token,
             'Content-Type' => 'text/plain'
         ])->get($url);
-        //dd(json_decode($data)->data[0]->id->id);
         return json_decode($data)->data[0]->id->id;
     }
 
