@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Person;
+use Carbon\Carbon;
 use PHPUnit\Util\Json;
 
 class PersonController extends Controller
@@ -17,7 +18,9 @@ class PersonController extends Controller
         $person = new Person;
         $person->user_id = $request->user_id;
         $person->full_name = $request->name;
+        $person->date_of_birth = $request->dob;
         $person->save();
+        //dd((new Carbon($request->dob))->diffInYears(Carbon::now()));
         return view('home');
     }
     public function api_data($id)

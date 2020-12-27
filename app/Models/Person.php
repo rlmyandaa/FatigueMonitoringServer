@@ -9,8 +9,5 @@ class Person extends Model
 {
     use HasFactory;
     protected $primaryKey = 'user_id';
-    public function report()
-    {
-        return $this->hasOne(Report::class, "user_id");
-    }
+    
 }

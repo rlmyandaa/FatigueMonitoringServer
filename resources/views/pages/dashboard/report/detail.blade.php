@@ -15,35 +15,35 @@
                             <div class="card">
                                 <div class="card-header text-center">{{ __('Shift Summary') }}</div>
                                 <div class="card-body">
-                                <table class="table">
-                            <thead></thead>
+                                    <table class="table">
+                                        <thead></thead>
 
-                            <tbody>
+                                        <tbody>
 
-                                <tr>
-                                    <td style="width: 25%">Nama</td>
-                                    <td> {{ $data->name }}</td>   
-                                </tr>
-                                
-                                <tr>
-                                    <td style="width: 25%">Attend Time</td>
-                                    <td> {{ $shift->attend_date}}</td>   
-                                </tr>
-                                <tr>
-                                    <td style="width: 25%">Shift Finish</td>
-                                    <td> {{ $shift->finish_time}}</td>   
-                                </tr>
-                                <tr>
-                                    <td style="width: 25%">Shift Duration</td>
-                                    <td> {{ $data->shiftDuration}}</td>   
-                                </tr>
+                                            <tr>
+                                                <td style="width: 25%">Nama</td>
+                                                <td> {{ $data->name }}</td>
+                                            </tr>
 
-
-
-                            </tbody>
+                                            <tr>
+                                                <td style="width: 25%">Attend Time</td>
+                                                <td> {{ $shift->attend_date}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 25%">Shift Finish</td>
+                                                <td> {{ $shift->finish_time}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 25%">Shift Duration</td>
+                                                <td> {{ $data->shiftDuration}}</td>
+                                            </tr>
 
 
-                        </table>
+
+                                        </tbody>
+
+
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                             <div class="card">
                                 <div class="card-header text-center">{{ __('Fatigue Summary') }}</div>
                                 <div class="card-body">
-                                <canvas class="col" id="canvas" width="400" height="400"></canvas>
+                                    <canvas class="col" id="canvas" width="400" height="400"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -65,9 +65,9 @@
             <div class="card-body">
                 <div class="container">
                     <div class="row">
-                        <canvas class="col" id="heartChart" width="400" height="400"></canvas>
-                        <canvas class="col" id="spo2Chart" width="400" height="400"></canvas>
-                        <canvas class="col" id="tempChart" width="400" height="400"></canvas>
+                        <canvas class="col" id="heartChart"></canvas>
+                        <canvas class="col" id="spo2Chart"></canvas>
+                        <canvas class="col" id="tempChart"></canvas>
 
                     </div>
                 </div>
@@ -96,12 +96,17 @@
                 backgroundColor: window.chartColors.red,
                 borderColor: window.chartColors.red,
                 data: report.hr,
+
+                pointRadius: 0,
                 fill: false,
+                lineTension: 0,
+                borderWidth: 1
             }]
         },
         options: {
+            
             legend: false,
-            responsive: false,
+            responsive: true,
             title: {
                 display: true,
                 text: 'Heart Rate Chart'
@@ -120,7 +125,17 @@
                     scaleLabel: {
                         display: true,
                         labelString: 'Time'
-                    }
+                    },
+                    ticks: {
+                        major: {
+                            enabled: true,
+                            fontStyle: 'bold'
+                        },
+                        source: 'data',
+                        autoSkip: true,
+                        autoSkipPadding: 50,
+                        sampleSize: 50
+                    },
                 }],
                 yAxes: [{
                     display: true,
@@ -137,19 +152,25 @@
         data: {
             labels: label,
             datasets: [{
-                label: "Heart Rate(BPM)",
+                label: "SPO2",
                 backgroundColor: window.chartColors.blue,
                 borderColor: window.chartColors.blue,
                 data: report.spo2,
                 fill: false,
+
+                pointRadius: 0,
+                fill: false,
+                lineTension: 0,
+                borderWidth: 1
             }]
         },
         options: {
+            
             legend: false,
-            responsive: false,
+            responsive: true,
             title: {
                 display: true,
-                text: 'SpO2 Chart'
+                text: 'SPO2 Chart'
             },
             tooltips: {
                 mode: 'index',
@@ -165,7 +186,17 @@
                     scaleLabel: {
                         display: true,
                         labelString: 'Time'
-                    }
+                    },
+                    ticks: {
+                        major: {
+                            enabled: true,
+                            fontStyle: 'bold'
+                        },
+                        source: 'data',
+                        autoSkip: true,
+                        autoSkipPadding: 50,
+                        sampleSize: 50
+                    },
                 }],
                 yAxes: [{
                     display: true,
@@ -182,16 +213,22 @@
         data: {
             labels: label,
             datasets: [{
-                label: "Heart Rate(BPM)",
+                label: "Temperature",
                 backgroundColor: window.chartColors.purple,
                 borderColor: window.chartColors.purple,
                 data: report.temperature,
                 fill: false,
+
+                pointRadius: 0,
+                fill: false,
+                lineTension: 0,
+                borderWidth: 2
             }]
         },
         options: {
+            
             legend: false,
-            responsive: false,
+            responsive: true,
             title: {
                 display: true,
                 text: 'Temperature Chart'
@@ -210,7 +247,17 @@
                     scaleLabel: {
                         display: true,
                         labelString: 'Time'
-                    }
+                    },
+                    ticks: {
+                        major: {
+                            enabled: true,
+                            fontStyle: 'bold'
+                        },
+                        source: 'data',
+                        autoSkip: true,
+                        autoSkipPadding: 50,
+                        sampleSize: 50
+                    },
                 }],
                 yAxes: [{
                     display: true,
@@ -223,27 +270,28 @@
         }
     };
 
-    rSum = [];
-    function parseResultSummary(){
-        rSum[0]=(report.resultSummary.Max);
-        rSum[1]=(report.resultSummary.Hard);
-        rSum[2]=(report.resultSummary.Moderate);
-        rSum[3]=(report.resultSummary.Light);
-        rSum[4]=(report.resultSummary.Relax);
+    var rSum = [];
+
+    function parseResultSummary() {
+        rSum[0] = (report.resultSummary.Max);
+        rSum[1] = (report.resultSummary.Hard);
+        rSum[2] = (report.resultSummary.Moderate);
+        rSum[3] = (report.resultSummary.Light);
+        rSum[4] = (report.resultSummary.Relax);
     }
     parseResultSummary();
     console.log(rSum);
     var horizontalBarChartData = {
-			labels: ['Maximum', 'Hard', 'Moderate', 'Light', 'Relax'],
-			datasets: [{
-				label: 'Dataset 1',
-				backgroundColor: window.chartColors.red,
-				borderColor: window.chartColors.red,
-				borderWidth: 1,
-				data: rSum
-			}]
+        labels: ['Maximum', 'Hard', 'Moderate', 'Light', 'Relax'],
+        datasets: [{
+            label: 'Dataset 1',
+            backgroundColor: window.chartColors.red,
+            borderColor: window.chartColors.red,
+            borderWidth: 1,
+            data: rSum
+        }]
 
-		};
+    };
     window.onload = function() {
         var hr = document.getElementById('heartChart').getContext('2d');
         window.myLine = new Chart(hr, heartRateData);
@@ -253,25 +301,25 @@
         window.myLine = new Chart(temp, tempData);
 
         var ctx = document.getElementById('canvas').getContext('2d');
-			window.myHorizontalBar = new Chart(ctx, {
-				type: 'horizontalBar',
-				data: horizontalBarChartData,
-				options: {
-					// Elements options apply to all of the options unless overridden in a dataset
-					// In this case, we are setting the border of each horizontal bar to be 2px wide
-					elements: {
-						rectangle: {
-							borderWidth: 2,
-						}
-					},
-					responsive: false,
-					legend: false,
-					title: {
-						display: true,
-						text: 'BPM Level'
-					}
-				}
-			});
+        window.myHorizontalBar = new Chart(ctx, {
+            type: 'horizontalBar',
+            data: horizontalBarChartData,
+            options: {
+                // Elements options apply to all of the options unless overridden in a dataset
+                // In this case, we are setting the border of each horizontal bar to be 2px wide
+                elements: {
+                    rectangle: {
+                        borderWidth: 2,
+                    }
+                },
+                responsive: false,
+                legend: false,
+                title: {
+                    display: true,
+                    text: 'BPM Level'
+                }
+            }
+        });
     };
 </script>
 @endsection

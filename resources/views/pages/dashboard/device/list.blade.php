@@ -15,6 +15,8 @@
                                 <th scope="col">Device Name</th>
                                 <th scope="col">Active</th>
                                 <th scope="col">User</th>
+                                <th scope="col">Device ID</th>
+                                
                             </tr>
                         </thead>
                         @php
@@ -32,6 +34,7 @@
                                 <td>{{$device->name}}</td>
                                 <td>{{$device->state}}</td>
                                 <td>{{$device->user}}</td>
+                                <td>{{$device->device_id}}</td>
                             </tr>
                             @endforeach
                         </tbody>

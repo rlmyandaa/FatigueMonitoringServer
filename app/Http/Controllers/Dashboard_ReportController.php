@@ -14,7 +14,7 @@ class Dashboard_ReportController extends Controller
         $data = array();
         foreach ($attendance as $d){
             $t_data = array(
-                "name" => Person::find($d->user_id)->value('full_name'),
+                "name" => Person::where('user_id', $d->user_id)->value('full_name'),
                 "attend_time" => $d->attend_date,
                 "finish_time" => $d->finish_time,
                 "report_url" => route('report.detail', ["uid" => $d->attendance_id]),
@@ -26,7 +26,8 @@ class Dashboard_ReportController extends Controller
     }
 
     public function detail($uid){
-        $data = json_decode(Report::find($uid)->value('report_result'));
+        $data = json_decode(Report::where('attendance_id', $uid)->value('report_result'));
+        //dd($data);
         $shift = Attendance::find(Report::find($uid)->value('user_id'));
         //dd($shift->attend_date);
         return view('pages.dashboard.report.detail', compact('data', 'shift'));

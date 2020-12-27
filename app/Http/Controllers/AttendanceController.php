@@ -38,17 +38,15 @@ class AttendanceController extends Controller
             "device_id" => $request->device_id,
             "attendance_id" => $attendance_uid,
             "person_name" => Person::where("user_id", $request->user_id)->value("full_name"),
+            "age" => (new Carbon(Person::where("user_id", $request->user_id)->value("date_of_birth")))->diffInYears(Carbon::now()),
         );
         $this->callRpc("setActive", $payload);
-
-        
     }
-
-    
 
     public function completeAttendance(Request $request)
     {
         $data = Attendance::find($request->user_id);
+        //dd($data);
         $data->finish_time = Carbon::now();
         $data->save();
         //return response()->json($data["attendance_id"]);

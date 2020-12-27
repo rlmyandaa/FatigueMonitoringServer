@@ -12,7 +12,10 @@
                         @csrf
                         <label>Input Name :</label>
                         <input type="text" name="name"> <br />
+                        <label>Input User Id :</label>
                         <input type="text" name="user_id"> <br />
+                        <label>Input User Id :</label>
+                        <input type="date" name="dob"> <br />
                         <button type="submit">Submit</button>
                     </form>
                 </div>

@@ -19,6 +19,7 @@ class RpcController extends Controller
         'params' => array(
             'attendanceId' => $payload->attendance_id,
             'fullName' => $payload->person_name,
+            'age' => $payload->age,
             )
         ]);
         //dd(($rpc));
