@@ -11,7 +11,7 @@
             <div class="card-body">
                 <div class="container">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-md-6 h-100 d-inline-block">
                             <div class="card">
                                 <div class="card-header text-center">{{ __('Shift Summary') }}</div>
                                 <div class="card-body">
@@ -47,11 +47,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-md-6 h-100 d-inline-block">
                             <div class="card">
                                 <div class="card-header text-center">{{ __('Fatigue Summary') }}</div>
                                 <div class="card-body">
-                                    <canvas class="col" id="canvas" width="400" height="400"></canvas>
+                                    <div class="h-100">
+                                        <canvas class="col" id="canvas"></canvas>                                
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -63,14 +66,18 @@
         <div class="card">
             <div class="card-header text-center">{{ __('Report Chart') }}</div>
             <div class="card-body">
-                <div class="container">
                     <div class="row">
-                        <canvas class="col" id="heartChart"></canvas>
-                        <canvas class="col" id="spo2Chart"></canvas>
-                        <canvas class="col" id="tempChart"></canvas>
-
+                        <div class="col-md-4 h-100 d-inline-block">
+                            <canvas id="heartChart"></canvas>
+                        </div>
+                        <div class="col-md-4 h-100 d-inline-block">
+                            <canvas id="spo2Chart"></canvas>
+                        </div>
+                        <div class="col-md-4 h-100 d-inline-block">
+                            <canvas id="tempChart"></canvas>
+                        </div>
                     </div>
-                </div>
+        
             </div>
         </div>
 
@@ -104,7 +111,7 @@
             }]
         },
         options: {
-            
+
             legend: false,
             responsive: true,
             title: {
@@ -165,7 +172,7 @@
             }]
         },
         options: {
-            
+
             legend: false,
             responsive: true,
             title: {
@@ -226,7 +233,7 @@
             }]
         },
         options: {
-            
+
             legend: false,
             responsive: true,
             title: {
@@ -312,7 +319,7 @@
                         borderWidth: 2,
                     }
                 },
-                responsive: false,
+                responsive: true,
                 legend: false,
                 title: {
                     display: true,

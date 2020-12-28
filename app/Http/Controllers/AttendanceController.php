@@ -45,16 +45,20 @@ class AttendanceController extends Controller
 
     public function completeAttendance(Request $request)
     {
-        $data = Attendance::find($request->user_id);
+        $data = Attendance::where('user_id',$request->user_id)->orderBy('attend_date', 'DESC')->first();
+        $attendance_id = $data["attendance_id"];
+        Attendance::where('attendance_id', $attendance_id)->update(['finish_time' => Carbon::now()]);
         //dd($data);
-        $data->finish_time = Carbon::now();
-        $data->save();
+        //$data->finish_time = Carbon::now();
+        //$data->save();
         //return response()->json($data["attendance_id"]);
+        //$data = Attendance::where('attendance_id', $attendance_id)->first();
         $payload = (object) array(
             "device_id" => $data->device_id,
         );
         $this->callRpc("setInactive", $payload);
-        return redirect()->route('api.report.generate', ['uid' => $data["attendance_id"]]);
+        //return response()->json($data);
+        return redirect()->route('api.report.generate', ['uid' => $attendance_id]);
     }
 
 

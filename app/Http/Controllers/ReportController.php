@@ -66,7 +66,7 @@ class ReportController extends Controller
         $u_data->shiftDuration = number_format(($diff/3600), 2, '.', ',')." hours";
         $update->report_result = json_encode($u_data);
         $update->save();
-        return response()->json($totalSampling);
+        //return response()->json($totalSampling);
     }
 
     private function percentage($up, $bellow) {
