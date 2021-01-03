@@ -36,3 +36,5 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/report', 'Dashboard_ReportController@all')->name('report');
     Route::get('/report/{uid}', 'Dashboard_ReportController@detail')->name('report.detail');
 });
+
+Route::get('/mailer', 'MailController@index');

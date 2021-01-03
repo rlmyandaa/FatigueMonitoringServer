@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\Report;
 use Carbon\Carbon;
 
+use App\Mail\FatigueEmail;
+use Illuminate\Support\Facades\Mail;
+
 class ReportController extends Controller
 {
     public function update(Request $request)
@@ -66,6 +69,7 @@ class ReportController extends Controller
         $u_data->shiftDuration = number_format(($diff/3600), 2, '.', ',')." hours";
         $update->report_result = json_encode($u_data);
         $update->save();
+        Mail::to("hersyanda.putra@gmail.com")->send(new FatigueEmail($u_data, $attendanceData));
         //return response()->json($totalSampling);
     }
 
