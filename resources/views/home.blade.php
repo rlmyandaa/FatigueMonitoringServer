@@ -14,11 +14,10 @@
                     </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('Welcome to Fatigue Monitoring Server') }}
                     <br />
                     <a class="btn btn-primary" href="/submit-person">Input Person</a> <br />
-                    <a class="btn btn-primary" href="/rpc/on">Turn On</a> <br />
-                    <a class="btn btn-primary" href="/rpc/off">Turn Off</a> <br />
+                    
                     
                 </div>
             </div>

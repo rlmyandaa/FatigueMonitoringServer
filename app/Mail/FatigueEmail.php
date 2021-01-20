@@ -35,7 +35,8 @@ class FatigueEmail extends Mailable
                 "name" => $this->result->name,
                 "attend_date" => $this->attendanceData->attend_date,
                 "shift_duration" => $this->result->shiftDuration,
-                "uid" => $this->result->attendanceID
+                "uid" => $this->result->attendanceID,
+                "summary" => $this->result->statusReportSummary
             ]);
     }
 }

@@ -52,9 +52,16 @@
                                 <div class="card-header text-center">{{ __('Fatigue Summary') }}</div>
                                 <div class="card-body">
                                     <div class="h-100">
-                                        <canvas class="col" id="canvas"></canvas>                                
+                                        <canvas class="col" id="canvas"></canvas>
+                                        <div class="card text-center">
+                                        
+                                        <div class="class-header font-weight-bold">Summary</div>
+                                        <div class="card-body">
+                                        {{ $data->statusReportSummary ?? ''}}                                        
+                                        </div>
+                                    </div>                               
                                     </div>
-
+                                    
                                 </div>
                             </div>
                         </div>

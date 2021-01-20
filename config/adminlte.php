@@ -295,6 +295,11 @@ return [
             'url'  => 'dashboard/report',
             'icon' => 'fas fa-fw fa-file-alt',
         ],
+        [
+            'text' => 'Warning List',
+            'url'  => 'dashboard/warning',
+            'icon' => 'fas fa-fw fa-exclamation',
+        ],
     ],
 
     /*

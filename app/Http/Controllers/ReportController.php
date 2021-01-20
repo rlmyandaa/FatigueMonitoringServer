@@ -9,6 +9,7 @@ use App\Models\Report;
 use Carbon\Carbon;
 
 use App\Mail\FatigueEmail;
+use App\Models\WarningList;
 use Illuminate\Support\Facades\Mail;
 
 class ReportController extends Controller
@@ -43,10 +44,11 @@ class ReportController extends Controller
         $report->report_result = json_encode($t_data);
         $report->save();
     }
-    public function generateReport($uid) {
+    public function generateReport($uid)
+    {
         $report_data = json_decode(Report::where('attendance_id', $uid)->value('report_result'));
-        $attendanceData = (object) Attendance::where('attendance_id',$uid)->first();
-        
+        $attendanceData = (object) Attendance::where('attendance_id', $uid)->first();
+
         $diff = (new Carbon($attendanceData->finish_time))->diffInRealSeconds(new Carbon($attendanceData->start_time));
         $totalSampling = count($report_data->timeState);
         $poolTime = 1;
@@ -55,9 +57,45 @@ class ReportController extends Controller
         $mp = $this->percentage(($report_data->hrStateCount[2]), $totalSampling);
         $hp = $this->percentage(($report_data->hrStateCount[3]), $totalSampling);
         $mxp = $this->percentage(($report_data->hrStateCount[4]), $totalSampling);
-        
+
         $update = Report::find($uid);
         $u_data = json_decode($update->report_result);
+
+        $statusSummary = "";
+        $confirmed = true;
+        do {
+            if ($mxp > 0) {
+                $statusSummary = "You've ever reach a maximum level of your Heart Rate Capacity. You better to see medical professional and have some rest.";
+                $warning = new WarningList;
+                $warning->name = $u_data->name;
+                $warning->attendance_id = $uid;
+                $warning->reviewed = false;
+                $warning->save();
+                $confirmed = false;
+                break;
+            }
+            if ($hp > 0) {
+                $statusSummary = "You've reach a hard level of your Heart Rate Capacity. You might've be a bit more tired now. Please have some rest.";
+                $warning = new WarningList;
+                $warning->name = $u_data->name;
+                $warning->attendance_id = $uid;
+                $warning->reviewed = false;
+                $warning->save();
+                $confirmed = false;
+                break;
+            }
+            if ($mp > 0) {
+                $statusSummary = "You've reach a moderate level of your Heart Rate Capacity. It should be normal, but don't forget to rest.";
+                $confirmed = false;
+                break;
+            }
+            if ($lp > 0 || $rp) {
+                $statusSummary = "You're just Fine. Have a Nice Day.";
+                $confirmed = false;
+                break;
+            }
+        } while ($confirmed);
+
 
         $u_data->resultSummary = (array(
             "Relax" => $rp,
@@ -66,15 +104,17 @@ class ReportController extends Controller
             "Hard" => $hp,
             "Max" => $mxp,
         ));
-        $u_data->shiftDuration = number_format(($diff/3600), 2, '.', ',')." hours";
+        $u_data->statusReportSummary = $statusSummary;       
+        $u_data->shiftDuration = number_format(($diff / 3600), 2, '.', ',') . " hours";
         $update->report_result = json_encode($u_data);
         $update->save();
         Mail::to("hersyanda.putra@gmail.com")->send(new FatigueEmail($u_data, $attendanceData));
         //return response()->json($totalSampling);
     }
 
-    private function percentage($up, $bellow) {
-        return (($up/$bellow)*100);
+    private function percentage($up, $bellow)
+    {
+        return (($up / $bellow) * 100);
     }
 
     public function temp(Request $request, $uid)
@@ -85,7 +125,7 @@ class ReportController extends Controller
 
         $report = Report::find($attendance_id);
         $t_data = json_decode($report->report_result);
-        
+
         array_push($t_data->hr, $decoded->bpm);
         array_push($t_data->spo2, $decoded->spo2);
         array_push($t_data->temperature, $decoded->temp);
@@ -111,7 +151,8 @@ class ReportController extends Controller
         $report->save();
     }
 
-    private function regexjson($json){
+    private function regexjson($json)
+    {
         $ss = preg_match('/({(?>[^{}]|(?0))*?})/', $json, $matches);
         return $matches[0];
     }

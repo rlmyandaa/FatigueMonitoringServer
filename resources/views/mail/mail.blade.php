@@ -348,22 +348,30 @@
 
 													<tr>
 														<td style="width: 40%">Name</td>
-														<td>: {{ $name }}</td>
+														<td style="width: 5%"> : </td>
+														<td>{{ $name }}</td>
 													</tr>
 
 													<tr>
 														<td style="width: 40%">Attend Date</td>
-														<td>: {{ $attend_date }} </td>
+														<td style="width: 5%"> : </td>
+														<td>{{ $attend_date }} </td>
 													</tr>
 													<tr>
 														<td style="width: 40%">Shift Duration</td>
-														<td>: {{ $shift_duration }} </td>
+														<td style="width: 5%"> : </td>
+														<td>{{ $shift_duration }} </td>
+													</tr>
+													<tr>
+														<td style="width: 40%">Result Summary</td>
+														<td style="width: 5%"> : </td>
+														<td>{{ $summary }} </td>
 													</tr>
 													
 												</tbody>
 											</table>
 										</div>
-										<p style="text-align: center;"><a href="http://localhost:8000/dashboard/report/{{$uid}}" class="btn btn-primary">Full
+										<p style="text-align: center;"><a href="http://192.168.100.3:8000/dashboard/report/{{$uid}}" class="btn btn-primary">Full
 												Report</a></p>
 									</div>
 								</td>
