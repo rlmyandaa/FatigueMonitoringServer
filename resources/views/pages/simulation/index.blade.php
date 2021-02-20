@@ -11,7 +11,7 @@
     <div class="card-header font-weight-bold text-center">Simulation Panel</div>
 
     <div class="card-body">
-        <div class="jumbotron" style="background: white;">
+        <div class="jumbotron jumbotron-fluid" style="background: white;">
             <h1 class="display-4 font-weight-bold">Under Construction</h1>
             <p class="lead">This feature currently required to set a proper working MCU device to connect and is under progress to create a proper simulation to simulate this system.</p>
             <p class="lead">Please contact get a proper simulation so that we could set an MCU for the simulation.</p>
@@ -20,21 +20,25 @@
             <div class="col-sm">
             </div>
             <div class="col-sm">
-                <div id="carouselExampleIndicators" class="carousel slide align-center" data-ride="carousel" style="height: 450px !important; width: 850px !important;">
+                <div id="carouselExampleIndicators" class="carousel slide align-center" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src="/img/Picture1.png" alt="First slide" style="height: 450px !important; width: 850px !important;">
+                            <img class="d-block w-100" src="/img/Picture1.jpg" alt="First slide">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="/img/Picture2.png" alt="Second slide" style="height: 450px !important; width: 850px !important;">
+                            <img class="d-block w-100" src="/img/Picture2.jpg" alt="Second slide">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="/img/Picture3.png" alt="Third slide" style="height: 450px !important; width: 850px !important;">
+                            <img class="d-block w-100" src="/img/Picture3.jpg" alt="Third slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="/img/Picture4.jpg" alt="Fourth slide">
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -51,6 +55,7 @@
 
             </div>
         </div>
+        <br>
     </div>
 </div>
 
