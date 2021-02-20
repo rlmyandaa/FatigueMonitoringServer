@@ -114,8 +114,6 @@
       background-color: #3b5998;
     }
 
-    /* Fallback for Edge
--------------------------------------------------- */
 
     @supports (-ms-ime-align: auto) {
       .form-label-group>label {
@@ -126,9 +124,6 @@
         color: #777;
       }
     }
-
-    /* Fallback for IE
--------------------------------------------------- */
 
     @media all and (-ms-high-contrast: none),
     (-ms-high-contrast: active) {

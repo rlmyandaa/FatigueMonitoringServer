@@ -177,9 +177,9 @@
                                 <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                                 <label for="inputEmail">Email address</label>
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
 
@@ -187,13 +187,13 @@
                                 <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
                                 <label for="inputPassword">Password</label>
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
-                           
+
 
                         </form>
                     </div>
@@ -207,15 +207,16 @@
         <div class="container">
 
             <div class="social d-flex justify-content-center">
-                <a class="mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                <a class="mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                <a class="mx-2" href="#!"><i class="fab fa-github"></i></a>
+                <a class="mx-2" href="https://www.linkedin.com/in/hersyanda-putra/"><i class="fab fa-linkedin"></i></a>
+                <a class="mx-2" href="https://github.com/rlmyandaa"><i class="fab fa-github"></i></a>
+                <a class="mx-2" href="https://instagram.com/l0wpassfilter"><i class="fab fa-instagram"></i></a>
+                <a class="mx-2" href="https://www.flickr.com/people/hersyandaa/"><i class="fab fa-flickr"></i></a>
             </div>
         </div>
     </section>
     <!-- Footer-->
     <footer class="footer bg-black small text-center text-white-50">
-        <div class="container">Copyright © Your Website 2020</div>
+        <div class="container">Copyright © Hersyanda Putra Adi 2021</div>
     </footer>
     <!-- Bootstrap core JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
