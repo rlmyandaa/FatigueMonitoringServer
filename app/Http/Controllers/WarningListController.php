@@ -16,6 +16,6 @@ class WarningListController extends Controller
         $data = WarningList::find($uid);
         $data->reviewed = true;
         $data->save();
-        return redirect('/dashboard/warning');
+        return redirect('/dashboard/report');
     }
 }

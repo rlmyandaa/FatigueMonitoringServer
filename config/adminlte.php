@@ -295,10 +295,16 @@ return [
             'url'  => 'dashboard/report',
             'icon' => 'fas fa-fw fa-file-alt',
         ],
+        ['header' => 'MANAGEMENT'],
         [
-            'text' => 'Warning List',
-            'url'  => 'dashboard/warning',
-            'icon' => 'fas fa-fw fa-exclamation',
+            'text' => 'Person Manager',
+            'url'  => '/submit-person',
+            'icon' => 'fas fa-fw fa-wave-square',
+        ],
+        [
+            'text' => 'Simulation Panel',
+            'url'  => 'dashboard/simulation',
+            'icon' => 'fas fa-fw fa-user ',
         ],
     ],
 

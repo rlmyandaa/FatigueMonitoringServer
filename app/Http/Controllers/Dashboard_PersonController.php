@@ -13,7 +13,7 @@ class Dashboard_PersonController extends Controller
         $data = Http::withHeaders([
             'X-Authorization' => $token,
             'Content-Type' => 'text/plain'
-        ])->get('http://localhost:8080/api/tenant/devices?type=fatigue&pageSize=999&page=0');
+        ])->get('http://demo.thingsboard.io/api/tenant/devices?type=fatigue&pageSize=999&page=0');
         $list = array();
         foreach (json_decode($data)->data as $d) {
             if (($this->getAttribute($this->getAccessToken($d->id->id, $token), $token)->activeDevice) == true){
@@ -34,16 +34,16 @@ class Dashboard_PersonController extends Controller
 
     private function getToken()
     {
-        $response = Http::post('http://localhost:8080/api/auth/login', [
-            'username' => 'tenant@thingsboard.org',
-            'password' => 'tenant',
+        $response = Http::post('http://demo.thingsboard.io/api/auth/login', [
+            'username' => 'yandaa_rlm@upi.edu',
+            'password' => 'thingsboard',
         ]);
         return json_decode($response)->token;
     }
 
     private function getAttribute($accessToken, $token)
     {
-        $url = 'http://localhost:8080/api/v1/' . $accessToken . '/attributes';
+        $url = 'http://demo.thingsboard.io/api/v1/' . $accessToken . '/attributes';
         //dd($url);
         $data = Http::withHeaders([
             'X-Authorization' => $token,
@@ -65,7 +65,7 @@ class Dashboard_PersonController extends Controller
     private function getAccessToken($deviceId, $token)
     {
         
-        $url = 'http://localhost:8080/api/device/' . $deviceId . '/credentials';
+        $url = 'http://demo.thingsboard.io/api/device/' . $deviceId . '/credentials';
         //dd($url);
         $data = Http::withHeaders([
             'X-Authorization' => $token,
@@ -85,7 +85,7 @@ class Dashboard_PersonController extends Controller
         $dashboardName = "Fatigue Monitoring : ".$dashboardName;
         $dashboardName = str_replace(' ', "%20", $dashboardName);
         $dashboardName = str_replace(":", "%3A", $dashboardName);
-        $url = ("http://localhost:8080/api/tenant/dashboards?textSearch=".$dashboardName."&pageSize=8&page=0");
+        $url = ("http://demo.thingsboard.io/api/tenant/dashboards?textSearch=".$dashboardName."&pageSize=8&page=0");
         
         //dd($url);
         $data = Http::withHeaders([
@@ -97,7 +97,7 @@ class Dashboard_PersonController extends Controller
     }
 
     private function getPublicId($token){
-        $url = "http://localhost:8080/api/tenant/customers?customerTitle=Public";
+        $url = "http://demo.thingsboard.io/api/tenant/customers?customerTitle=Public";
         
         
         //dd($url);

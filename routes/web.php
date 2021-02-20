@@ -23,6 +23,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/submit-person', 'PersonController@index');
 Route::post('/submit-person/submit', 'PersonController@submit');
+Route::get('/submit-person/report/{id}', 'PersonController@report');
+Route::get('/submit-person/delete/{id}', 'PersonController@delete');
+
 Route::post('/alert/update', 'PersonController@api_alert');
 
 Route::middleware('api')->get('/rpc/on', 'RpcController@on');
@@ -38,6 +41,9 @@ Route::prefix('dashboard')->group(function () {
 
     Route::get('/warning', 'WarningListController@list');
     Route::get('/warning/reviewed/{uid}', 'WarningListController@reviewed');
+    Route::get('/simulation', function(){
+        return view('pages.simulation.index');
+    });
 });
 
 Route::get('/mailer', 'MailController@index');

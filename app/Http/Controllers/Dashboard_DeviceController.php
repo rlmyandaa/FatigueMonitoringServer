@@ -13,7 +13,7 @@ class Dashboard_DeviceController extends Controller
         $data = Http::withHeaders([
             'X-Authorization' => $token,
             'Content-Type' => 'text/plain'
-        ])->get('http://localhost:8080/api/tenant/devices?type=fatigue&pageSize=999&page=0');
+        ])->get('http://demo.thingsboard.io/api/tenant/devices?type=fatigue&pageSize=999&page=0');
         //$testa = $this->getAccessToken(json_decode($data)->data[1]->id->id);
         //$testb = $this->getAttribute($testa);
         //dd($testb->activeDevice);
@@ -39,16 +39,16 @@ class Dashboard_DeviceController extends Controller
 
     private function getToken()
     {
-        $response = Http::post('http://localhost:8080/api/auth/login', [
-            'username' => 'tenant@thingsboard.org',
-            'password' => 'tenant',
+        $response = Http::post('http://demo.thingsboard.io/api/auth/login', [
+            'username' => 'yandaa_rlm@upi.edu',
+            'password' => 'thingsboard',
         ]);
         return json_decode($response)->token;
     }
 
     private function getAttribute($accessToken, $token)
     {
-        $url = 'http://localhost:8080/api/v1/' . $accessToken . '/attributes';
+        $url = 'http://demo.thingsboard.io/api/v1/' . $accessToken . '/attributes';
         //dd($url);
         $data = Http::withHeaders([
             'X-Authorization' => $token,
@@ -69,7 +69,7 @@ class Dashboard_DeviceController extends Controller
 
     private function getAccessToken($deviceId, $token)
     {
-        $url = 'http://localhost:8080/api/device/' . $deviceId . '/credentials';
+        $url = 'http://demo.thingsboard.io/api/device/' . $deviceId . '/credentials';
         //dd($url);
         $data = Http::withHeaders([
             'X-Authorization' => $token,

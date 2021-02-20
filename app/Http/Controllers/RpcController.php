@@ -10,8 +10,8 @@ class RpcController extends Controller
 {
     public function setActive($payload){
         $token = 'Bearer '.$this->getToken();
-        //dd($token);
-        $url = "http://localhost:8080/api/plugins/rpc/oneway/".$payload->device_id;
+        dd($token);
+        $url = "http://demo.thingsboard.io/api/plugins/rpc/oneway/".$payload->device_id;
         $rpc = Http::withHeaders([
             'X-Authorization' => $token,
             'Content-Type' => 'text/plain'
@@ -28,7 +28,7 @@ class RpcController extends Controller
     public function setInactive($payload){
         $token = 'Bearer '.$this->getToken();
         //dd($token);
-        $url = "http://localhost:8080/api/plugins/rpc/oneway/".$payload->device_id;
+        $url = "http://demo.thingsboard.io/api/plugins/rpc/oneway/".$payload->device_id;
         $rpc = Http::withHeaders([
             'X-Authorization' => $token,
             'Content-Type' => 'text/plain'
@@ -39,9 +39,9 @@ class RpcController extends Controller
 
     
     private function getToken(){
-        $response = Http::post('http://localhost:8080/api/auth/login', [
-            'username' => 'tenant@thingsboard.org',
-            'password' => 'tenant',
+        $response = Http::post('http://demo.thingsboard.io/api/auth/login', [
+            'username' => 'yandaa_rlm@upi.edu',
+            'password' => 'thingsboard',
         ]);
         
         return json_decode($response)->token;
